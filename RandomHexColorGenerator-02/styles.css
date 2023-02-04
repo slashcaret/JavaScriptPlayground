@@ -9,6 +9,7 @@
   --color-sec: #db6400;
   --grey: #eee;
   --dark-grey: #222831;
+  --check-display:none;
 }
 
 * {
@@ -89,11 +90,52 @@ margin-top: 2rem;
 }
 
 
+
 button.copy{
   background-color: transparent;
   width: 20%;
   border: 2px solid black;
+  position: relative;
 }
+
+button.copy::before{
+  content: "Copied!";
+  position: absolute;
+  top: -45px;
+  left: 0px;
+  background-color: white;
+  padding: 8px 8px;
+  font-size:inherit;
+  border-radius: 6px;
+  /* display: var(--check-display); */ 
+  display: none;
+
+}
+
+.copy.active::before{
+  display: block;
+}
+
+/* .tooltip{
+  visibility: visible;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+
+  opacity: 0;
+  transition: opacity 0.3s;
+} */
 
 button.refreshClr{
   background-color: transparent;

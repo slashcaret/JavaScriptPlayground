@@ -24,6 +24,8 @@ const counterDiv = document.querySelector(".counter-div");
 const clrText = document.querySelector(".clrText");
 const buttons = document.querySelector(".buttons");
 
+const btnCopy = document.querySelector(".copy");
+
 buttons.addEventListener("click",(e)=>{
     //console.log(e.target.classList);
     if(e.target.classList.contains("refreshClr"))
@@ -34,23 +36,24 @@ buttons.addEventListener("click",(e)=>{
     {
         let copiedText = clrText.textContent;
         navigator.clipboard.writeText(copiedText.toString());
-        alert("Copied!");
+        //alert("Copied!");
+        e.target.classList.add("active");
+
+        setTimeout(() => {
+            e.target.classList.remove("active");
+        }, 1500);
+
+        //new approach ---start
+        // e.target.style.setProperty("--check-display","block");
+        // setTimeout(() => {
+        //     e.target.style.setProperty("--check-display","none");
+        // }, 1500);
+        //new approach ---end
+
+        // let styles = window.getComputedStyle(e.target,':before')
+        // styles['display'] = "block";
 
     }
    
 });
 
-const setColor = (textIn) =>{
-        if(textIn>0)
-        {
-            count.style.color ="#82b74b";
-        }
-        if(textIn<0)
-        {
-            count.style.color ="tomato";
-        }
-        if(textIn==0)
-        {
-            count.style.color ="white";
-        }
-};
