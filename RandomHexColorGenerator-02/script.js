@@ -9,10 +9,21 @@ const generateRandomColor = ()=>{
 };
 const setBgColor = ()=>{
     let color = generateRandomColor();
-    clrText.textContent = color;
+    colorText.textContent = color;
     counterDiv.style.backgroundColor = color;
     counterDiv.style.boxShadow = `1px 2px 10px 4px ${color}`;
     body.style.backgroundColor = color;
+    body.style.setProperty("--check-color",setForeColor(color));
+    
+};
+
+const setForeColor = (hexcolor)=>{
+    let r = parseInt(hexcolor.substring(1,3),16);
+    let g = parseInt(hexcolor.substring(3,5),16);
+    let b = parseInt(hexcolor.substring(5,7),16);
+    console.log(hexcolor.substring(1,3),hexcolor.substring(3,5),hexcolor.substring(5,7));
+    let yiq = ((r*299)+(g*587)+(b*114))/1000;
+    return (yiq >= 128) ? 'black' : 'white';
 };
 
 document.addEventListener("DOMContentLoaded", setBgColor);
@@ -21,7 +32,7 @@ document.addEventListener("DOMContentLoaded", setBgColor);
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
 const counterDiv = document.querySelector(".counter-div");
-const clrText = document.querySelector(".clrText");
+const colorText = document.querySelector(".colorText");
 const buttons = document.querySelector(".buttons");
 
 const btnCopy = document.querySelector(".copy");
@@ -34,7 +45,7 @@ buttons.addEventListener("click",(e)=>{
     }
     if(e.target.classList.contains("copy"))
     {
-        let copiedText = clrText.textContent;
+        let copiedText = colorText.textContent;
         navigator.clipboard.writeText(copiedText.toString());
         //alert("Copied!");
         e.target.classList.add("active");
